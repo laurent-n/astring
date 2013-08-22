@@ -1,0 +1,534 @@
+# depslib dependency file v1.0
+1376384067 source:c:\dev\_altidev\cplusplus\stl98\astringut\main.cpp
+	<iostream>
+	<cppunit/BriefTestProgressListener.h>
+	<cppunit/CompilerOutputter.h>
+	<cppunit/extensions/TestFactoryRegistry.h>
+	<cppunit/TestResult.h>
+	<cppunit/TestResultCollector.h>
+	<cppunit/TestRunner.h>
+
+1026453596 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\brieftestprogresslistener.h
+	<cppunit/TestListener.h>
+
+1139075366 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testlistener.h
+	<cppunit/Portability.h>
+
+1151615490 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability.h
+	<cppunit/config/config-bcb5.h>
+	<cppunit/config/config-evc4.h>
+	<cppunit/config/config-msvc6.h>
+	<cppunit/config-auto.h>
+	<cppunit/config/CppUnitApi.h>
+	<cppunit/config/SelectDllLoader.h>
+
+1026453598 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\config-bcb5.h
+
+1172359038 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\config-evc4.h
+
+1172359038 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\config-msvc6.h
+
+1376383941 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config-auto.h
+
+1019123294 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\cppunitapi.h
+
+1052339354 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\selectdllloader.h
+
+1151611398 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\compileroutputter.h
+	<cppunit/Portability.h>
+	<cppunit/Outputter.h>
+	<cppunit/portability/Stream.h>
+
+1026453596 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\outputter.h
+	<cppunit/Portability.h>
+
+1130444554 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability\stream.h
+	<cppunit/Portability.h>
+	<string>
+	<stdio.h>
+	<string.h>
+	<sstream>
+	<fstream>
+	<string>
+	<strstream>
+	<strstream.h>
+	<iostream>
+
+1032201166 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testfactoryregistry.h
+	<cppunit/Portability.h>
+	<cppunit/portability/CppUnitSet.h>
+	<cppunit/extensions/TestFactory.h>
+	<string>
+
+1032201412 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability\cppunitset.h
+	<cppunit/Portability.h>
+	<functional>
+	<set>
+
+1026453598 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testfactory.h
+	<cppunit/Portability.h>
+
+1161847272 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testresult.h
+	<cppunit/Portability.h>
+	<cppunit/SynchronizedObject.h>
+	<cppunit/portability/CppUnitDeque.h>
+	<string>
+
+1026453598 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\synchronizedobject.h
+	<cppunit/Portability.h>
+
+1032201412 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability\cppunitdeque.h
+	<cppunit/Portability.h>
+	<deque>
+
+1120598260 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testresultcollector.h
+	<cppunit/Portability.h>
+	<cppunit/TestSuccessListener.h>
+	<cppunit/portability/CppUnitDeque.h>
+
+1026453598 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testsuccesslistener.h
+	<cppunit/SynchronizedObject.h>
+	<cppunit/TestListener.h>
+
+1030649228 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testrunner.h
+	<cppunit/TestSuite.h>
+	<string>
+
+1120894968 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testsuite.h
+	<cppunit/Portability.h>
+	<cppunit/TestComposite.h>
+	<cppunit/portability/CppUnitVector.h>
+
+1026453598 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testcomposite.h
+	<cppunit/Test.h>
+	<string>
+
+1026453598 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\test.h
+	<cppunit/Portability.h>
+	<string>
+
+1032201412 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability\cppunitvector.h
+	<cppunit/Portability.h>
+	<vector>
+
+1376838664 source:c:\dev\_altidev\cplusplus\stl98\astringut\testgroup.cpp
+	<cstring>
+	<cppunit/config/SourcePrefix.h>
+	<cppunit/extensions/HelperMacros.h>
+	"..\AString.h"
+	<sstream>
+	<vector>
+	<algorithm>
+	<functional>
+
+1131299902 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\sourceprefix.h
+	<cppunit/Portability.h>
+
+1079185976 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\helpermacros.h
+	<cppunit/TestCaller.h>
+	<cppunit/TestSuite.h>
+	<cppunit/extensions/AutoRegisterSuite.h>
+	<cppunit/extensions/ExceptionTestCaseDecorator.h>
+	<cppunit/extensions/TestFixtureFactory.h>
+	<cppunit/extensions/TestNamer.h>
+	<cppunit/extensions/TestSuiteBuilderContext.h>
+	<memory>
+
+1028389672 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testcaller.h
+	<cppunit/Exception.h>
+	<cppunit/TestCase.h>
+	<cppunit/extensions/TypeInfoHelper.h>
+
+1030649228 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\exception.h
+	<cppunit/Portability.h>
+	<cppunit/Message.h>
+	<cppunit/SourceLine.h>
+	<exception>
+
+1100898044 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\message.h
+	<cppunit/Portability.h>
+	<cppunit/portability/CppUnitDeque.h>
+	<string>
+
+1100898044 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\sourceline.h
+	<cppunit/Portability.h>
+	<string>
+
+1028389672 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testcase.h
+	<cppunit/Portability.h>
+	<cppunit/TestLeaf.h>
+	<cppunit/TestAssert.h>
+	<cppunit/TestFixture.h>
+	<string>
+
+1026453598 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testleaf.h
+	<cppunit/Test.h>
+
+1172359038 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testassert.h
+	<cppunit/Portability.h>
+	<cppunit/Exception.h>
+	<cppunit/Asserter.h>
+	<cppunit/portability/Stream.h>
+	<stdio.h>
+	<float.h>
+
+1030606610 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\asserter.h
+	<cppunit/AdditionalMessage.h>
+	<cppunit/SourceLine.h>
+	<string>
+
+1026453596 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\additionalmessage.h
+	<cppunit/Message.h>
+
+1026453598 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testfixture.h
+	<cppunit/Portability.h>
+
+1088160088 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\typeinfohelper.h
+	<cppunit/Portability.h>
+	<typeinfo>
+	<string>
+
+1026556430 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\autoregistersuite.h
+	<cppunit/extensions/TestSuiteFactory.h>
+	<cppunit/extensions/TestFactoryRegistry.h>
+	<string>
+
+1026453598 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testsuitefactory.h
+	<cppunit/extensions/TestFactory.h>
+
+1047722128 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\exceptiontestcasedecorator.h
+	<cppunit/Portability.h>
+	<cppunit/Exception.h>
+	<cppunit/extensions/TestCaseDecorator.h>
+
+1028389672 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testcasedecorator.h
+	<cppunit/Portability.h>
+	<cppunit/TestCase.h>
+
+1168581274 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testfixturefactory.h
+	<cppunit/Portability.h>
+
+1048147702 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testnamer.h
+	<cppunit/Portability.h>
+	<string>
+	<typeinfo>
+
+1087544386 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testsuitebuildercontext.h
+	<cppunit/Portability.h>
+	<cppunit/portability/CppUnitMap.h>
+	<string>
+
+1032201412 c:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability\cppunitmap.h
+	<cppunit/Portability.h>
+	<functional>
+	<map>
+
+1376856179 c:\dev\_altidev\cplusplus\stl98\astring.h
+	<iostream>
+	<sstream>
+	<deque>
+	<exception>
+	<string>
+
+1376838078 source:c:\dev\_altidev\cplusplus\stl98\astring.cpp
+	"AString.h"
+	<cstring>
+	<stdarg.h>
+	<stdio.h>
+	<sstream>
+
+1376893022 source:d:\dev\_altidev\cplusplus\stl98\astring.cpp
+	"AString.h"
+	<cstring>
+	<stdarg.h>
+	<stdio.h>
+	<sstream>
+
+1376986886 d:\dev\_altidev\cplusplus\stl98\astring.h
+	<iostream>
+	<sstream>
+	<deque>
+	<exception>
+	<string>
+
+1376384067 source:d:\dev\_altidev\cplusplus\stl98\astringut\main.cpp
+	<iostream>
+	<cppunit/BriefTestProgressListener.h>
+	<cppunit/CompilerOutputter.h>
+	<cppunit/extensions/TestFactoryRegistry.h>
+	<cppunit/TestResult.h>
+	<cppunit/TestResultCollector.h>
+	<cppunit/TestRunner.h>
+
+1026453596 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\brieftestprogresslistener.h
+	<cppunit/TestListener.h>
+
+1139075366 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testlistener.h
+	<cppunit/Portability.h>
+
+1151615490 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability.h
+	<cppunit/config/config-bcb5.h>
+	<cppunit/config/config-evc4.h>
+	<cppunit/config/config-msvc6.h>
+	<cppunit/config-auto.h>
+	<cppunit/config/CppUnitApi.h>
+	<cppunit/config/SelectDllLoader.h>
+
+1026453598 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\config-bcb5.h
+
+1172359038 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\config-evc4.h
+
+1172359038 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\config-msvc6.h
+
+1376988009 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config-auto.h
+
+1019123294 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\cppunitapi.h
+
+1052339354 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\selectdllloader.h
+
+1151611398 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\compileroutputter.h
+	<cppunit/Portability.h>
+	<cppunit/Outputter.h>
+	<cppunit/portability/Stream.h>
+
+1026453596 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\outputter.h
+	<cppunit/Portability.h>
+
+1130444554 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability\stream.h
+	<cppunit/Portability.h>
+	<string>
+	<stdio.h>
+	<string.h>
+	<sstream>
+	<fstream>
+	<string>
+	<strstream>
+	<strstream.h>
+	<iostream>
+
+1032201166 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testfactoryregistry.h
+	<cppunit/Portability.h>
+	<cppunit/portability/CppUnitSet.h>
+	<cppunit/extensions/TestFactory.h>
+	<string>
+
+1032201412 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability\cppunitset.h
+	<cppunit/Portability.h>
+	<functional>
+	<set>
+
+1026453598 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testfactory.h
+	<cppunit/Portability.h>
+
+1161847272 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testresult.h
+	<cppunit/Portability.h>
+	<cppunit/SynchronizedObject.h>
+	<cppunit/portability/CppUnitDeque.h>
+	<string>
+
+1026453598 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\synchronizedobject.h
+	<cppunit/Portability.h>
+
+1032201412 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability\cppunitdeque.h
+	<cppunit/Portability.h>
+	<deque>
+
+1120598260 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testresultcollector.h
+	<cppunit/Portability.h>
+	<cppunit/TestSuccessListener.h>
+	<cppunit/portability/CppUnitDeque.h>
+
+1026453598 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testsuccesslistener.h
+	<cppunit/SynchronizedObject.h>
+	<cppunit/TestListener.h>
+
+1030649228 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testrunner.h
+	<cppunit/TestSuite.h>
+	<string>
+
+1120894968 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testsuite.h
+	<cppunit/Portability.h>
+	<cppunit/TestComposite.h>
+	<cppunit/portability/CppUnitVector.h>
+
+1026453598 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testcomposite.h
+	<cppunit/Test.h>
+	<string>
+
+1026453598 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\test.h
+	<cppunit/Portability.h>
+	<string>
+
+1032201412 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability\cppunitvector.h
+	<cppunit/Portability.h>
+	<vector>
+
+1376838664 source:d:\dev\_altidev\cplusplus\stl98\astringut\testgroup.cpp
+	<cstring>
+	<cppunit/config/SourcePrefix.h>
+	<cppunit/extensions/HelperMacros.h>
+	"..\AString.h"
+	<sstream>
+	<vector>
+	<algorithm>
+	<functional>
+
+1131299902 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\config\sourceprefix.h
+	<cppunit/Portability.h>
+
+1079185976 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\helpermacros.h
+	<cppunit/TestCaller.h>
+	<cppunit/TestSuite.h>
+	<cppunit/extensions/AutoRegisterSuite.h>
+	<cppunit/extensions/ExceptionTestCaseDecorator.h>
+	<cppunit/extensions/TestFixtureFactory.h>
+	<cppunit/extensions/TestNamer.h>
+	<cppunit/extensions/TestSuiteBuilderContext.h>
+	<memory>
+
+1028389672 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testcaller.h
+	<cppunit/Exception.h>
+	<cppunit/TestCase.h>
+	<cppunit/extensions/TypeInfoHelper.h>
+
+1030649228 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\exception.h
+	<cppunit/Portability.h>
+	<cppunit/Message.h>
+	<cppunit/SourceLine.h>
+	<exception>
+
+1100898044 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\message.h
+	<cppunit/Portability.h>
+	<cppunit/portability/CppUnitDeque.h>
+	<string>
+
+1100898044 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\sourceline.h
+	<cppunit/Portability.h>
+	<string>
+
+1028389672 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testcase.h
+	<cppunit/Portability.h>
+	<cppunit/TestLeaf.h>
+	<cppunit/TestAssert.h>
+	<cppunit/TestFixture.h>
+	<string>
+
+1026453598 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testleaf.h
+	<cppunit/Test.h>
+
+1172359038 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testassert.h
+	<cppunit/Portability.h>
+	<cppunit/Exception.h>
+	<cppunit/Asserter.h>
+	<cppunit/portability/Stream.h>
+	<stdio.h>
+	<float.h>
+
+1030606610 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\asserter.h
+	<cppunit/AdditionalMessage.h>
+	<cppunit/SourceLine.h>
+	<string>
+
+1026453596 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\additionalmessage.h
+	<cppunit/Message.h>
+
+1026453598 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\testfixture.h
+	<cppunit/Portability.h>
+
+1088160088 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\typeinfohelper.h
+	<cppunit/Portability.h>
+	<typeinfo>
+	<string>
+
+1026556430 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\autoregistersuite.h
+	<cppunit/extensions/TestSuiteFactory.h>
+	<cppunit/extensions/TestFactoryRegistry.h>
+	<string>
+
+1026453598 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testsuitefactory.h
+	<cppunit/extensions/TestFactory.h>
+
+1047722128 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\exceptiontestcasedecorator.h
+	<cppunit/Portability.h>
+	<cppunit/Exception.h>
+	<cppunit/extensions/TestCaseDecorator.h>
+
+1028389672 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testcasedecorator.h
+	<cppunit/Portability.h>
+	<cppunit/TestCase.h>
+
+1168581274 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testfixturefactory.h
+	<cppunit/Portability.h>
+
+1048147702 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testnamer.h
+	<cppunit/Portability.h>
+	<string>
+	<typeinfo>
+
+1087544386 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\extensions\testsuitebuildercontext.h
+	<cppunit/Portability.h>
+	<cppunit/portability/CppUnitMap.h>
+	<string>
+
+1032201412 d:\dev\_altidev\cplusplus\cppunit-1.12.1\include\cppunit\portability\cppunitmap.h
+	<cppunit/Portability.h>
+	<functional>
+	<map>
+
+1377194285 source:d:\dev\_altidev\cplusplus\astring\astring.cpp
+	"AString.h"
+	<cstring>
+	<stdarg.h>
+	<stdio.h>
+	<sstream>
+
+1377195871 d:\dev\_altidev\cplusplus\astring\astring.h
+	<atlstr.h>
+	<vcl.h>
+	<iostream>
+	<sstream>
+	<deque>
+	<exception>
+	<string>
+
+1377132006 source:d:\dev\_altidev\cplusplus\astring\astringunittest.cpp
+	<cstring>
+	<cppunit/config/SourcePrefix.h>
+	<cppunit/extensions/HelperMacros.h>
+	"AString.h"
+	<sstream>
+	<vector>
+	<algorithm>
+	<functional>
+
+1376384067 source:d:\dev\_altidev\cplusplus\astring\ut_cb_wingcc\main.cpp
+	<iostream>
+	<cppunit/BriefTestProgressListener.h>
+	<cppunit/CompilerOutputter.h>
+	<cppunit/extensions/TestFactoryRegistry.h>
+	<cppunit/TestResult.h>
+	<cppunit/TestResultCollector.h>
+	<cppunit/TestRunner.h>
+
+1377156236 source:d:\dev\_altidev\cplusplus\astring\astringunittest2.cpp
+	"AString.h"
+	"AString.cpp"
+	"AStringUnitTest.cpp"
+
+1377131621 d:\dev\_altidev\cplusplus\astring\astring.cpp
+	"AString.h"
+	<cstring>
+	<stdarg.h>
+	<stdio.h>
+	<sstream>
+
+1377132006 d:\dev\_altidev\cplusplus\astring\astringunittest.cpp
+	<cstring>
+	<cppunit/config/SourcePrefix.h>
+	<cppunit/extensions/HelperMacros.h>
+	"AString.h"
+	<sstream>
+	<vector>
+	<algorithm>
+	<functional>
+
