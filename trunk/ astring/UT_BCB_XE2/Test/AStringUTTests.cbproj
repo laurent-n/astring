@@ -1,0 +1,187 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{176EB4F5-E7F7-4941-A921-C310C854BDF1}</ProjectGuid>
+			<ProjectVersion>13.4</ProjectVersion>
+			<FrameworkType>VCL</FrameworkType>
+			<MainSource>AStringUTTests.cpp</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform Condition="'$(Platform)'==''">Win32</Platform>
+			<TargetedPlatforms>1</TargetedPlatforms>
+			<AppType>Application</AppType>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+			<Base_Win32>true</Base_Win32>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+			<Cfg_1_Win32>true</Cfg_1_Win32>
+			<CfgParent>Cfg_1</CfgParent>
+			<Cfg_1>true</Cfg_1>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_Define>_DEBUG;DUNIT_GUI;$(DCC_Define)</DCC_Define>
+			<PackageImports>fmx;IndySystem;DBXInterBaseDriver;DbxCommonDriver;dbxcds;CustomIPTransport;dsnap;IndyCore;fmxase;inetdbxpress;IPIndyImpl;bindcompfmx;rtl;dbrtl;DbxClientDriver;bindcomp;inetdb;xmlrtl;ibxpress;IndyProtocols;DBXMySQLDriver;bindengine;soaprtl;inet;fmxobj;fmxdae;dbexpress;$(PackageImports)</PackageImports>
+			<Multithreaded>true</Multithreaded>
+			<DCC_UnitSearchPath>$(BDS)\Source\DUnit\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<IncludePath>..\..\;$(IncludePath)</IncludePath>
+			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
+			<ProjectType>CppVCLApplication</ProjectType>
+			<UsingDelphiRTL>true</UsingDelphiRTL>
+			<DCC_DcuOutput>.</DCC_DcuOutput>
+			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
+			<ILINK_LibraryPath>..\..\;$(BDSLIB)\$(PLATFORM)\debug;$(BDS)\source\dunit\src;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<_TCHARMapping>wchar_t</_TCHARMapping>
+			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+			<DynamicRTL>true</DynamicRTL>
+			<UsePackages>true</UsePackages>
+			<IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
+			<FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
+			<BCC_wpar>false</BCC_wpar>
+			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
+			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<PackageImports>fsADO16;cxLibraryRS16;dxLayoutControlRS16;dxCoreRS16;cxExportRS16;dxSkinSevenRS16;dxSkinCoffeeRS16;Tee916;TeeUI916;dxDBXServerModeRS16;frxTee16;Rave100VCL;vclib;inetdbbde;dxSkinSummer2008RS16;dxPSCoreRS16;dxPScxGridLnkRS16;FmxTeeUI916;FMITeeLanguage916;TeePro916;cxPageControlRS16;dacfmx160;fsIBX16;dxSkinVS2010RS16;vclimg;dxSkinDevExpressStyleRS16;dxSkinWhiteprintRS16;dxComnRS16;dxSkinOffice2007SilverRS16;vcldb;dxSkinBlackRS16;dxADOServerModeRS16;vcldsnap;dac160;FMXTeeDB916;unidacvcl160;dxSkinBlueRS16;Intraweb_120_160;dxSkinXmas2008BlueRS16;frxADO16;vclribbon;frxe16;dxSkinDarkRoomRS16;vcl;dxSkinDevExpressDarkStyleRS16;dxSkinOffice2007BlueRS16;CloudService;CodeSiteExpressPkg;dxSkinOffice2007GreenRS16;FMXTeePro916;cxDataRS16;unidac160;fsTee16;FMXTee916;webdsnap;dxSkinTheAsphaltWorldRS16;dxPSLnksRS16;TeeDB916;fcd16;dxSkinOffice2010BlackRS16;dxSkinMoneyTwinsRS16;dxSkinPumpkinRS16;adortl;dxPSdxLCLnkRS16;TeeLanguage916;dxSkinSharpRS16;dxSkinHighContrastRS16;dxSkinOffice2007BlackRS16;frxDBX16;dxSkinBlueprintRS16;dxPScxExtCommonRS16;TeeImage916;dxSkiniMaginaryRS16;vcldbx;frx16;dxSkinLondonLiquidSkyRS16;FMITee916;TeeWorld916;crcontrols160;dxSkinGlassOceansRS16;dxSkinLiquidSkyRS16;dxSkinFoggyRS16;dxSkinsCoreRS16;dxPScxCommonRS16;dxmdsRS16;fsBDE16;intrawebdb_120_160;frxDB16;cxGridRS16;dxSkinDarkSideRS16;fs16;vclactnband;cxEditorsRS16;dxSkinscxPCPainterRS16;dxServerModeRS16;bindcompvcl;dxSkinSevenClassicRS16;FMITeeDB916;TeeGL916;vclie;FMITeePro916;dxSkinOffice2010SilverRS16;vcltouch;dacvcl160;bcbsmp;websnap;dxSkinOffice2007PinkRS16;VclSmp;dxSkinSpringTimeRS16;fsDB16;TeeTree2D16Tee9;dxSkinSilverRS16;dxSkinStardustRS16;dclfrxTee16;unidacfmx160;dsnapcon;dxSkinOffice2010BlueRS16;dxThemeRS16;dcldxSkinsCoreRS16;dxPScxPCProdRS16;dxSkinLilianRS16;vclx;FmiTeeUI916;dxSkinCaramelRS16;dxSkinValentineRS16;FMXTeeLanguage916;bdertl;dxSkinMcSkinRS16;dxGDIPlusRS16;bcbie;dxSkinSharpPlusRS16;$(PackageImports)</PackageImports>
+			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+			<IncludePath>$(BDSINCLUDE)\windows\vcl;$(IncludePath)</IncludePath>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<VerInfo_Locale>1033</VerInfo_Locale>
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
+			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+			<Defines>_DEBUG;$(Defines)</Defines>
+			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
+			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
+			<DCC_Define>DEBUG</DCC_Define>
+			<BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+			<TASM_DisplaySourceLines>true</TASM_DisplaySourceLines>
+			<BCC_StackFrames>true</BCC_StackFrames>
+			<ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+			<TASM_Debugging>Full</TASM_Debugging>
+			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<Defines>NDEBUG;$(Defines)</Defines>
+			<TASM_Debugging>None</TASM_Debugging>
+		</PropertyGroup>
+		<ItemGroup>
+			<CppCompile Include="..\..\AString.cpp">
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="AStringUTTests.cpp">
+				<BuildOrder>0</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="TestAString.cpp">
+				<DependentOn>TestAString.h</DependentOn>
+				<BuildOrder>1</BuildOrder>
+			</CppCompile>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
+			<Borland.ProjectType>CppVCLApplication</Borland.ProjectType>
+			<BorlandProject>
+				<CPlusPlusBuilder.Personality>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1036</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\fmidesigner160.bpl">Concepteur de fiches FMI et éditeurs de composants et de propriétés</Excluded_Packages>
+						<Excluded_Packages Name="C:\Program Files\FastReports\FastReport 4\LibD16\dclfrxbde16.bpl">FastReport 4.0 BDE Components</Excluded_Packages>
+						<Excluded_Packages Name="C:\Program Files\FastReports\FastReport 4\LibD16\dclfrxibx16.bpl">FastReport 4.0 IBX Components</Excluded_Packages>
+						<Excluded_Packages Name="C:\Program Files\FastReports\FastReport 4\LibD16\dclfrxcs16.bpl">FastReport 4.0 Client/Server Components</Excluded_Packages>
+						<Excluded_Packages Name="C:\Program Files\Developer Express.VCL\Library\RS16\dcldxPSTeeChartRS16.bpl">ExpressPrinting System ReportLink for TeeChart by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="C:\Program Files\Developer Express.VCL\Library\RS16\dcldxPSDBTeeChartRS16.bpl">ExpressPrinting System ReportLink for DBTeeChart by Developer Express Inc.</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\bcboffice2k160.bpl">Package Serveurs Office 2000 Embarcadero C++Builder</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\bcbofficexp160.bpl">Package Serveurs Office XP Embarcadero C++Builder</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k160.bpl">Composants Microsoft Office 2000 Sample Automation Server Wrapper</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp160.bpl">Composants Microsoft Office XP Sample Automation Server Wrapper</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\RBuilder\Lib\Win32\dclRBU1416.bpl">ReportBuilder Sample Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\RBuilder\Lib\Win32\dclRBBDE1416.bpl">ReportBuilder Data Access for BDE</Excluded_Packages>
+						<Excluded_Packages Name="C:\Program Files\RadarSoft\HierCube\DXE2\Lib\xhChart160.bpl">HierCube Library Chart</Excluded_Packages>
+						<Excluded_Packages Name="C:\Documents and Settings\All Users\Documents\RAD Studio\9.0\BPL\QExport4DT_C16.bpl">EMS Advanced Export Component Suite (C++)</Excluded_Packages>
+						<Excluded_Packages Name="C:\Documents and Settings\All Users\Documents\RAD Studio\9.0\BPL\QImport3DT_C16.bpl">EMS Advanced Import Component Suite (C++)</Excluded_Packages>
+					</Excluded_Packages>
+					<ProjectProperties>
+						<ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
+						<ProjectProperties Name="ManagePaths">True</ProjectProperties>
+						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
+					</ProjectProperties>
+					<Source>
+						<Source Name="MainSource">AStringUTTests.cpp</Source>
+					</Source>
+				</CPlusPlusBuilder.Personality>
+				<Deployment/>
+				<UnitTesting>
+					<TestFramework>DUnit / C++ Win32</TestFramework>
+					<TestRunner>GUI</TestRunner>
+					<SourceProjectName>D:\dev\_Altidev\cplusplus\AString\UT_BCB_XE2\AStringUT.cbproj</SourceProjectName>
+				</UnitTesting>
+				<Platforms>
+					<Platform value="OSX32">False</Platform>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+	</Project>
