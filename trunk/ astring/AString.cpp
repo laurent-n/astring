@@ -2,7 +2,6 @@
 #include <cstring>
 #include <stdarg.h>
 #include <stdio.h>
-#include <sstream>
 
 //#define ASTRING_DEBUG_TRACE_ENABLE
 #ifdef ASTRING_DEBUG_TRACE_ENABLE
@@ -164,7 +163,7 @@ ASTRING_IMPLEMENT_WITH_STD_STRING_CODE(:std::string(Src.c_str() ))
 #endif
 }
 AString::AString(const UnicodeString &Src)
-ASTRING_IMPLEMENT_WITH_STD_STRING_CODE(:std::string(AnsiString(Src).c_str() )) 
+ASTRING_IMPLEMENT_WITH_STD_STRING_CODE(:std::string(AnsiString(Src).c_str() ))
 {
 	ASTRING_DEBUG_TRACE("construct AnsiString ",Src.c_str());
 #if ! ASTRING_IMPLEMENT_WITH_STD_STRING
@@ -202,7 +201,7 @@ AString::AString(CStringA &Src)
 	if(len>0)
 	{
 		AllocBuffer(len);
-		GetSize()=len;		
+		GetSize()=len;
 		memcpy(StrBuffer,Src.GetBuffer(0),len);
 		StrBuffer[len]=0;
 	}
@@ -593,7 +592,7 @@ size_t AString::find(const char* Searched,unsigned StartPos/*=0*/,unsigned count
     if(count==0)
         count=(unsigned)strlen(Searched);
     if(count==0)
-        throw AStringException("Find:Invalid separator length");
+        throw AStringException("Find:Invalid Searched length");
     if(StartPos>size())
         return npos;
     if(count>size())
@@ -640,6 +639,133 @@ std::ostream& operator<<(std::ostream& os, const AString& str)
 }
 #endif
 
+//-------------------------------------------------------------
+AString& AString::replace( size_t pos, size_t count,const AString& str )
+{
+#if ASTRING_IMPLEMENT_WITH_STD_STRING
+    std::string::replace(pos,count,str);
+    return *this;
+#else
+    if((pos+count)>size())
+        throw AStringException("replace:pos+count > size");
+    size_t NewStringSize=str.size();
+    if(count==NewStringSize)
+    {// Replace by same size is simple and quick
+        for(size_t i=0;i<count;i++)
+            at(pos+i)=str[i];
+    }
+    else if(count>NewStringSize)
+    {  // replace by smaller string
+        for(size_t i=0;i<NewStringSize;i++)
+            at(pos+i)=str[i];
+        size_t Remaining=size()-(pos+count);
+        for(size_t i=0;i<=Remaining;i++) // <= to copy also the zero
+            at(pos+NewStringSize+i)=at(pos+count+i);
+        GetSize()=pos+NewStringSize+Remaining;
+    }
+    else
+    {  // replace by bigger string
+        // Save the end of the string
+        AString EndOfString=substr(pos+count);
+        GetSize()=pos;
+        if(capacity()<(GetSize()+str.size()+EndOfString.size()))
+            reserve(GetSize()+str.size()+EndOfString.size());
+        (*this)+=str;
+        (*this)+=EndOfString;
+    }
+    return *this;
+#endif
+}
+//-------------------------------------------------------------
+AString& AString::replace( const AString& src,const AString& str )
+{
+    size_t startpos=0;
+    while(1)
+    {
+       size_t  pos=find(src.c_str(),startpos,src.size());
+       if(pos==npos)
+          return *this;
+       replace(pos,src.size(),str);
+       startpos=pos+str.size();
+    }
+}
+//-------------------------------------------------------------
+AString& AString::rtrim(const char *CharsToRemove)
+{
+    unsigned CharToRemoveSize=strlen(CharsToRemove);
+    if(size()==0)
+        return *this;
+    size_t pos=size();
+    size_t count=0; // Count of char to remove
+    do{
+        pos--;
+        bool CharRemoved=false;
+        for(unsigned i=0;i<CharToRemoveSize;i++)
+            if((*this)[pos]==CharsToRemove[i])
+            {
+                CharRemoved=true;
+                count++;
+                break;
+            }
+       if(CharRemoved==false)
+        break;
+    }
+    while(pos);
+    if(count>0)
+    {
+#if ASTRING_IMPLEMENT_WITH_STD_STRING
+    resize(size()-count);
+#else
+    (*this)[size()-count]=0;
+    RecomputeSize();
+#endif
+    }
+    return *this;
+}
+//-------------------------------------------------------------
+AString& AString::ltrim(const char *CharsToRemove)
+{
+    unsigned CharToRemoveSize=strlen(CharsToRemove);
+    if(size()==0)
+        return *this;
+    size_t pos=0;
+    size_t count=0; // Count of char to remove
+    do{
+        bool CharRemoved=false;
+        for(unsigned i=0;i<CharToRemoveSize;i++)
+            if((*this)[pos]==CharsToRemove[i])
+            {
+                CharRemoved=true;
+                count++;
+                break;
+            }
+       if(CharRemoved==false)
+        break;
+       pos++;
+    }
+    while((*this)[pos]!=0);
+    if(count>0)
+    {
+#if ASTRING_IMPLEMENT_WITH_STD_STRING
+    assign(substr(count));
+#else
+    char* destptr=StrBuffer;
+    do{
+        *destptr=destptr[pos];
+        destptr++;
+    }while(*destptr);
+    RecomputeSize();
+#endif
+    }
+    return *this;
+}
+//-------------------------------------------------------------
+AString& AString::trim(const char *CharsToRemove)
+{
+    rtrim(CharsToRemove);
+    ltrim(CharsToRemove);
+    return *this;
+}
 //-------------------------------------------------------------
 void AString::strncpy( char* dest,size_t destsize,unsigned pos /*= 0*/) const
 {
