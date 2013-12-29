@@ -1,7 +1,7 @@
 /**
 \mainpage AString Main Page
 \author Laurent NAVARRO ln@altidev.com
-\version 0.1 2013-08-22
+\version 0.2 2013-12-29
 \copyright MIT X11 : See  .h file header
 Copyright (C) 2013 Laurent NAVARRO
 Permission is hereby granted, free of charge, to any person obtaining
@@ -46,6 +46,10 @@ AString provide the following features :
 - Buffer based implementation can be directly used on printf with %s on some compiler
 - Can easily be modified
 
+\subsection doc Documentation
+Documentation is generated using Doxygen,
+available online here <a href="http://www.altidev.com/ln/AString/">http://www.altidev.com/ln/AString/</a>
+or at chm format here <a href="http://www.altidev.com/ln/AString/AString.chm">AString.chm</a> and on the repository.
 
 \subsection impl Implementation details
 if \c ASTRING_IMPLEMENT_WITH_STD_STRING is set to 0 the string is implemented by a pointer on a buffer. \n
@@ -62,8 +66,8 @@ and to compute with offset to access to stored size and capacity attributes as d
 +--------------+
 \endcode
 \todo
-- Add missing std::string reimplementation (replace,rfind)
-- Add some features Trim, TrimLeft, TrimRight, ToUpper, ToLower
+- Add missing std::string reimplementation (rfind)
+- Add some features  ToUpper, ToLower
 - Add some useful string simple algorithms
     - ToIntFromHex "0x20" or "20" to 32 , ToIntFromBin "0101" to 5
     - assignAsHex 32 to "0x20" or "20" optional 0x
@@ -87,16 +91,25 @@ And valgring on Linux, here command to test : \n
 - valgrind --tool=memcheck bin/Debug/AStringUT
 - valgrind --leak-check=full --tool=memcheck bin/Debug/AStringUT
 
+\subsection release Release History
+- version 0.1 2013-08-22 Initial
+- version 0.2 2013-12-29
+    - Adding Replace of string by a string
+    - Adding trim, ltrim, rtrim
+
+
 */
 #ifndef ASTRING_H_INCLUDED
 #define ASTRING_H_INCLUDED
 //---------- Write your settings Here -------------------
-//#define ASTRING_IMPLEMENT_WITH_STD_STRING 0
+//#define ASTRING_IMPLEMENT_WITH_STD_STRING 1
+
+
 #if _MSC_VER
 #define ASTRING_INTEROP_VSS 1
 #endif
 //#define ASTRING_NOSTL 1
-//-------------------------------------------
+//---------- End of your settings  -------------------
 
 #ifndef ASTRING_IMPLEMENT_WITH_STD_STRING
   /**
@@ -316,7 +329,7 @@ class AString
     S1+="My String";
     \endcode
     \param RightStr the appended string
-    @return the current string
+    \return the current string
     ****************************************************/
     AString& operator +=(const AString &RightStr) ;
     bool operator ==(const AString &RightStr) const;
@@ -331,6 +344,23 @@ class AString
     size_t find(char Searched,unsigned StartPos=0) const;
 #endif //  ! ASTRING_IMPLEMENT_WITH_STD_STRING
     /**
+    Replace a set or character by a string on the current string.
+    \param pos position where the substitition start
+    \param count number of character to substitute
+    \param str string to insert on the specified location
+    \return the current string
+    */
+    AString& replace( size_t pos, size_t count,const AString& str );
+    /**
+    Replace a substring by a nzw string on the current string.
+    \param src the substring to replace
+    \return the current string
+    */
+    AString& replace( const AString& src,const AString& str );
+    AString& rtrim(const char *CharsToRemove=" \r\n\t");
+    AString& ltrim(const char *CharsToRemove=" \r\n\t");
+    AString& trim(const char *CharsToRemove=" \r\n\t");
+    /**
     Securely copy the current string on a C buffer.
     If the string is longer than what can be hold on the destination buffer, string will
     be truncated.\n
@@ -344,7 +374,7 @@ class AString
     // buf=="0123"
     S1.strncpy(buf,sizeof(buf),10);
     // buf=="ABCDEF"
-	\endcode
+    \endcode
     \param dest destination C Buffer
     \param destsize size of the buffer
     \param pos position where the copy will occur
@@ -357,7 +387,7 @@ class AString
     \code
     S3.Format("Y %d %.02f %s",10,2.52,"DEF");
     // S3 ="Y 10 2.52 DEF"
-	\endcode
+    \endcode
     \param dest destination C Buffer
     \param destsize size of the buffer
     \param pos position where the copy will occur

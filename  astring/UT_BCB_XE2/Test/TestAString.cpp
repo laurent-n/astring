@@ -178,13 +178,66 @@ void __fastcall TTestAString::Modifiers()
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"Hello") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)5u, S7.size() );
 
-    S7=AString("0123456789");
+	S7=AString("0123456789");
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"0123456789") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)10u, S7.size() );
 
-    S7="ABCD";
+	S7="ABCD";
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"ABCD") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)4u, S7.size() );
+
+    S7.reserve(5);
+	S7.replace(1,2,"bc");
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"AbcD") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)4u, S7.size() );
+
+	S7.replace(1,2,"bcxy");
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"AbcxyD") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)6u, S7.size() );
+	CPPUNIT_ASSERT ( 6u<= S7.capacity() );
+
+	S7=AString("0123456789");
+	S7.replace(1,4,"XY");
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"0XY56789") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)8u, S7.size() );
+
+
+	S7=AString("LE abcd LELE");
+	S7.replace("LE","LES");
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"LES abcd LESLES") );
+
+	S7.replace("LES","La");
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"La abcd LaLa") );
+
+    S7=AString(" \t\n\r AB CD \t\n\r ");
+    S7.rtrim();
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str()," \t\n\r AB CD") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)10u, S7.size() );
+
+    S7=AString(" \t\n\r AB CD \t\n\r ");
+    S7.ltrim();
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"AB CD \t\n\r ") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)10u, S7.size() );
+
+    S7=AString(" \t\n\r AB CD \t\n\r ");
+    S7.trim();
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"AB CD") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)5u, S7.size() );
+
+    S7=AString(" \t\n\r  \t\n\r ");
+    S7.ltrim();
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S7.size() );
+
+    S7=AString(" \t\n\r  \t\n\r ");
+    S7.rtrim();
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S7.size() );
+
+    S7=AString(" \t\n\r  \t\n\r ");
+    S7.trim();
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S7.size() );
 
 }
 
