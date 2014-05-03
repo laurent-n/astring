@@ -522,7 +522,14 @@ bool AString::operator ==(const char* RightStr) const
       ++sL; // Go to next char
       ++sR;
    }
+   if(*sL!=*sR)
+    return false;
    return true;
+}
+//-------------------------------------------------------------
+bool operator ==(const char *LeftStr,const AString &RightStr)
+{
+    return RightStr==LeftStr;
 }
 //-------------------------------------------------------------
 bool AString::operator <(const AString &RightStr) const
@@ -533,13 +540,33 @@ bool AString::operator <(const AString &RightStr) const
    {
        if(*sL<*sR)
         return true;
+       if(*sL>*sR)
+        return false;
+      ++sL; // Go to next char
+      ++sR;
+   }
+   if(*sR) // Right string have more char, if begining equal it's longer
+    return true;
+   return false;
+}
+//-------------------------------------------------------------
+bool AString::operator >(const AString &RightStr) const
+{
+   char *sL=StrBuffer;
+   char *sR=RightStr.StrBuffer;
+   while(*sL)
+   {
+       if(*sL>*sR)
+        return true;
+       if(*sL<*sR)
+        return false;
       ++sL; // Go to next char
       ++sR;
    }
    return false;
 }
 //-------------------------------------------------------------
-bool AString::operator <(const char *&RightStr) const
+bool AString::operator <(const char *RightStr) const
 {
    char *sL=StrBuffer;
    const char *sR=RightStr;
@@ -547,6 +574,26 @@ bool AString::operator <(const char *&RightStr) const
    {
        if(*sL<*sR)
         return true;
+       if(*sL>*sR)
+        return false;
+      ++sL; // Go to next char
+      ++sR;
+   }
+   if(*sR) // Right string have more char, if begining equal it's longer
+    return true;
+   return false;
+}
+//-------------------------------------------------------------
+bool AString::operator >(const char *RightStr) const
+{
+   char *sL=StrBuffer;
+   const char *sR=RightStr;
+   while(*sL)
+   {
+       if(*sL>*sR)
+        return true;
+       if(*sL<*sR)
+        return false;
       ++sL; // Go to next char
       ++sR;
    }
@@ -561,6 +608,26 @@ bool operator <(const char *LeftStr,const AString &RightStr)
    {
        if(*sL<*sR)
         return true;
+       if(*sL>*sR)
+        return false;
+      ++sL; // Go to next char
+      ++sR;
+   }
+   if(*sR) // Right string have more char, if begining equal it's longer
+    return true;
+   return false;
+}
+//-------------------------------------------------------------
+bool operator >(const char *LeftStr,const AString &RightStr)
+{
+   const char *sL=LeftStr;
+   char *sR=RightStr.StrBuffer;
+   while(*sL)
+   {
+       if(*sL>*sR)
+        return true;
+       if(*sL<*sR)
+        return false;
       ++sL; // Go to next char
       ++sR;
    }
@@ -576,6 +643,10 @@ bool AString::operator !=(const AString &RightStr) const
 bool AString::operator !=(const char* RightStr) const
 {
     return !(*this==RightStr);
+}
+bool operator !=(const char *LeftStr,const AString &RightStr)
+{
+    return !(RightStr==LeftStr);
 }
 //-------------------------------------------------------------
 AString AString::substr( unsigned pos /*= 0*/,unsigned count /*= npos*/ ) const

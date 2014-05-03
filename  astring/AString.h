@@ -1,7 +1,7 @@
 /**
 \mainpage AString Main Page
 \author Laurent NAVARRO ln@altidev.com
-\version 0.2 2013-12-29
+\version 0.3 2014-05-02
 \copyright MIT X11 : See  .h file header
 Copyright (C) 2013 Laurent NAVARRO
 Permission is hereby granted, free of charge, to any person obtaining
@@ -74,7 +74,6 @@ and to compute with offset to access to stored size and capacity attributes as d
     - assignAsBin 5 to "0101" parameter to set width and space on result (0101 0011 if param=4)
 - Finalize/improve documentation and tests, test on Clang
 - Add interaction with some others frameworks (QT, WxWidget, ... )
-- Add Demo Project not requiring CPP Unit.
 - Improve implementation of CString interoperability (make constructor param const by avoiding get buffer
 
 \subsection test Test details
@@ -96,7 +95,9 @@ And valgring on Linux, here command to test : \n
 - version 0.2 2013-12-29
     - Adding Replace of string by a string
     - Adding trim, ltrim, rtrim
-
+- version 0.3 2014-05-02
+    - Bugfix on comparison operator
+    - Added Char* on left of comparison operator
 
 */
 #ifndef ASTRING_H_INCLUDED
@@ -333,12 +334,17 @@ class AString
     ****************************************************/
     AString& operator +=(const AString &RightStr) ;
     bool operator ==(const AString &RightStr) const;
+    friend bool operator ==(const char *LeftStr,const AString &RightStr);
     bool operator ==(const char* RightStr) const;
     bool operator !=(const AString &RightStr) const;
     bool operator !=(const char *RightStr) const;
+    friend bool operator !=(const char *LeftStr,const AString &RightStr);
     bool operator <(const AString &RightStr) const;
-    bool operator <(const char *&RightStr) const;
+    bool operator <(const char *RightStr) const;
+    bool operator >(const AString &RightStr) const;
+    bool operator >(const char *RightStr) const;
     friend bool operator <(const char *LeftStr,const AString &RightStr);
+    friend bool operator >(const char *LeftStr,const AString &RightStr);
     AString substr( unsigned pos = 0,unsigned count = npos ) const;
     size_t find(const char* Searched,unsigned StartPos=0,unsigned count=0) const;
     size_t find(char Searched,unsigned StartPos=0) const;
