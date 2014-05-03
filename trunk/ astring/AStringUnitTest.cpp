@@ -158,6 +158,7 @@ void Modifiers()
     CPPUNIT_ASSERT_EQUAL ( 'e', S6[1]);
     CPPUNIT_ASSERT_EQUAL ( 'l', S6.at(2));
     // Test const accesors
+    {
     const AString S1("World");
     CPPUNIT_ASSERT_EQUAL ( 'o', S1[1]);
     CPPUNIT_ASSERT_EQUAL ( 'r', S1.at(2));
@@ -167,11 +168,67 @@ void Modifiers()
 	CPPUNIT_ASSERT_EQUAL ( (size_t)10u, (S2+S1).size() );
 
 	CPPUNIT_ASSERT ( S1!=S2 );
-	CPPUNIT_ASSERT ( S1!="Hello" );
-	CPPUNIT_ASSERT ( S1=="World" );
 	CPPUNIT_ASSERT ( S2+" "+S1=="Hello World" );
 	// test Char*+AString
     CPPUNIT_ASSERT ( "Hello "+S1=="Hello World" );
+
+    }
+	AString S1="abcd";
+	AString S2="aacd";
+	//S2="Wnrle";
+	CPPUNIT_ASSERT ( S1!="Hello" );
+	CPPUNIT_ASSERT ( S1=="abcd" );
+	CPPUNIT_ASSERT ( !(S1=="abcde") );
+	CPPUNIT_ASSERT ( !(S1=="abc") );
+	CPPUNIT_ASSERT ( !(S1=="") );
+	CPPUNIT_ASSERT ( "abcd"==S1 );
+	CPPUNIT_ASSERT ( !("abcde"==S1) );
+	CPPUNIT_ASSERT ( !("abc"==S1) );
+	CPPUNIT_ASSERT ( S1==AString("abcd") );
+	CPPUNIT_ASSERT ( !(S1==AString("abcde")) );
+	CPPUNIT_ASSERT ( !(S1==AString("abc")) );
+	CPPUNIT_ASSERT ( !(S1==AString("")) );
+	CPPUNIT_ASSERT ( !("abcd"!=S1) );
+	CPPUNIT_ASSERT (  ("abcde"!=S1) );
+	CPPUNIT_ASSERT (  ("abc"!=S1) );
+	CPPUNIT_ASSERT ( S1<"bbcd" );
+	CPPUNIT_ASSERT ( !(S1<S2) );
+	CPPUNIT_ASSERT ( S2<S1 );
+	CPPUNIT_ASSERT ( !(S1<"aacd") );
+	CPPUNIT_ASSERT ( !(S1<"abcc") );
+	CPPUNIT_ASSERT ( !(S1<"abcd") );
+	CPPUNIT_ASSERT ( S1<"abcde" );
+	CPPUNIT_ASSERT ( S1>"abcc" );
+	CPPUNIT_ASSERT ( S1>"abc" );
+	CPPUNIT_ASSERT ( S1>"aacd" );
+	CPPUNIT_ASSERT ( !(S2>S1) );
+	CPPUNIT_ASSERT ( S1>S2 );
+	CPPUNIT_ASSERT ( "abc"<S1 );
+	CPPUNIT_ASSERT ( !("abcd"<S1) );
+	CPPUNIT_ASSERT ( !("abcde"<S1) );
+	CPPUNIT_ASSERT ( !("abcd">S1) );
+	CPPUNIT_ASSERT ( !("abcc">S1) );
+	CPPUNIT_ASSERT ( "abcde">S1 );
+	/*S2="accd";
+	CPPUNIT_ASSERT ( !(S2<S1) );
+	CPPUNIT_ASSERT ( S1<S2 );
+	CPPUNIT_ASSERT ( !(S1>S2) );
+	CPPUNIT_ASSERT ( S2>S1 ); */
+	S2="accd";
+	CPPUNIT_ASSERT ( !(S1>S2) );
+	CPPUNIT_ASSERT ( !(S1>"accd") );
+	CPPUNIT_ASSERT ( !("abcd">S2) );
+	CPPUNIT_ASSERT ( (S1<S2) );
+	CPPUNIT_ASSERT ( (S1<"accd") );
+	CPPUNIT_ASSERT ( ("abcd"<S2) );
+	S2="aacd";
+	CPPUNIT_ASSERT ( !(S1<S2) );
+	CPPUNIT_ASSERT ( !(S1<"aacd") );
+	CPPUNIT_ASSERT ( !("abcd"<S2) );
+	S2="abcde";
+	CPPUNIT_ASSERT ( S1<S2 );
+	CPPUNIT_ASSERT ( !(S1==S2) );
+	CPPUNIT_ASSERT ( S1!=S2 );
 
     AString S7;
     S6.assign("Hello");
@@ -341,9 +398,13 @@ void TestStream()
 
     std::vector<AString> Vs;
     Vs.push_back("Hello");
-    Vs.push_back("dear");
-    Vs.push_back("friends");
     AString S3=AString::implode(AString(" "),Vs);
+	CPPUNIT_ASSERT_EQUAL ( AString("Hello"), S3 );
+    Vs.push_back("dear");
+    S3=AString::implode(AString(" "),Vs);
+	CPPUNIT_ASSERT_EQUAL ( AString("Hello dear"), S3 );
+    Vs.push_back("friends");
+    S3=AString::implode(AString(" "),Vs);
 	CPPUNIT_ASSERT_EQUAL ( AString("Hello dear friends"), S3 );
 
     std::deque<AString> Ds;
