@@ -41,18 +41,18 @@ AString::~AString() ASTRING_NOEXCEPT
 }
 //-------------------------------------------------------------
 AString::AString(const char *str,int count/*=-1*/)
-ASTRING_IMPLEMENT_WITH_STD_STRING_CODE(:std::string(str,count<0?strlen(str):count))
+ASTRING_IMPLEMENT_WITH_STD_STRING_CODE(:std::string(str,(count)<0?strlen(str):count))
 {
 	ASTRING_DEBUG_TRACE("construct char* ",str);
 #if ! ASTRING_IMPLEMENT_WITH_STD_STRING
-    unsigned len;
+    size_t len;
     if(count>=0)
         len=count;
     else
-        len=(unsigned)strlen(str);
+        len=strlen(str);
     if(len>0)
     {
-        AllocBuffer(len);
+        AllocBuffer((unsigned)len);
         memcpy(StrBuffer,str,len);
         StrBuffer[len]=0;
         GetSize()=(unsigned)strlen(StrBuffer); // in case str contains a \0
@@ -258,6 +258,16 @@ ASTRING_IMPLEMENT_WITH_STD_STRING_CODE(:std::string(Src))
         StrBuffer=(char*)&EmptyBuffer;
 #endif
 }
+AString::operator std::string () const
+{
+#if  ASTRING_IMPLEMENT_WITH_STD_STRING
+    return *this;
+#else
+    std::string s(c_str());
+    return s;
+#endif
+}
+
 #endif
 //-------------------------------------------------------------
 AString& AString::operator =(const AString& Src)
@@ -354,12 +364,12 @@ void AString::reserve(size_t count)
     char *PrevStr=c_str();
     unsigned PrevLen=(unsigned)size();
     char *PrevBuffer=GetRawBuffer();
+    if(PrevLen>(unsigned)count)
+        count=(size_t)PrevLen; // Reserve can't be smaller than current size
     AllocBuffer((unsigned)count);
-    GetSize()=(unsigned)count;
     if(count)
     {
-        if(PrevLen>(unsigned)count)
-            PrevLen=(unsigned)count;
+        GetSize()=(unsigned)count;
         memcpy(StrBuffer,PrevStr,PrevLen);
         StrBuffer[PrevLen]=0;
 		GetSize()=PrevLen;
@@ -649,30 +659,27 @@ bool operator !=(const char *LeftStr,const AString &RightStr)
     return !(RightStr==LeftStr);
 }
 //-------------------------------------------------------------
-AString AString::substr( unsigned pos /*= 0*/,unsigned count /*= npos*/ ) const
+AString AString::substr( size_t pos /*= 0*/,size_t count /*= npos*/ ) const
 {
     if(pos>size())
         throw AStringException("substr:Invalid position");
-    if((count>(unsigned)size())||((pos+count)>size()))
-        count=(unsigned)size()-pos;
-    return  AString(&StrBuffer[pos],count);
+    if((count!=npos)&&((count>size())||((pos+count)>size())))
+        count=size()-pos;
+    return  AString(&StrBuffer[pos],(int)count);
 }
 //-------------------------------------------------------------
-size_t AString::find(const char* Searched,unsigned StartPos/*=0*/,unsigned count/*=0*/) const
+size_t AString::find(const char* Searched,size_t StartPos/*=0*/,size_t count/*=0*/) const
 {
     if(count==0)
         count=(unsigned)strlen(Searched);
-    if(count==0)
-        throw AStringException("Find:Invalid Searched length");
     if(StartPos>size())
         return npos;
     if(count>size())
         return npos;
     char *Source=StrBuffer+StartPos;
-    unsigned c;
     while(*Source)
     {
-        c=0;
+        unsigned c=0;
         while(c<count)
         {
             if(Source[c]!=Searched[c])
@@ -686,7 +693,7 @@ size_t AString::find(const char* Searched,unsigned StartPos/*=0*/,unsigned count
     return npos;
 }
 //-------------------------------------------------------------
-size_t AString::find(char Searched,unsigned StartPos/*=0*/) const
+size_t AString::find(char Searched,size_t StartPos/*=0*/) const
 {
     return find(&Searched,StartPos,1);
 }
@@ -732,13 +739,13 @@ AString& AString::replace( size_t pos, size_t count,const AString& str )
         size_t Remaining=size()-(pos+count);
         for(size_t i=0;i<=Remaining;i++) // <= to copy also the zero
             at(pos+NewStringSize+i)=at(pos+count+i);
-        GetSize()=pos+NewStringSize+Remaining;
+        GetSize()=static_cast<unsigned int>(pos+NewStringSize+Remaining);
     }
     else
     {  // replace by bigger string
         // Save the end of the string
         AString EndOfString=substr(pos+count);
-        GetSize()=pos;
+        GetSize()=static_cast<unsigned int>(pos);
         if(capacity()<(GetSize()+str.size()+EndOfString.size()))
             reserve(GetSize()+str.size()+EndOfString.size());
         (*this)+=str;
@@ -763,7 +770,7 @@ AString& AString::replace( const AString& src,const AString& str )
 //-------------------------------------------------------------
 AString& AString::rtrim(const char *CharsToRemove)
 {
-    unsigned CharToRemoveSize=strlen(CharsToRemove);
+    unsigned CharToRemoveSize=static_cast<unsigned int>(strlen(CharsToRemove));
     if(size()==0)
         return *this;
     size_t pos=size();
@@ -796,7 +803,7 @@ AString& AString::rtrim(const char *CharsToRemove)
 //-------------------------------------------------------------
 AString& AString::ltrim(const char *CharsToRemove)
 {
-    unsigned CharToRemoveSize=strlen(CharsToRemove);
+    unsigned CharToRemoveSize=static_cast<unsigned int>(strlen(CharsToRemove));
     if(size()==0)
         return *this;
     size_t pos=0;
@@ -814,7 +821,7 @@ AString& AString::ltrim(const char *CharsToRemove)
         break;
        pos++;
     }
-    while((*this)[pos]!=0);
+    while(pos<size());
     if(count>0)
     {
 #if ASTRING_IMPLEMENT_WITH_STD_STRING
@@ -824,7 +831,7 @@ AString& AString::ltrim(const char *CharsToRemove)
     do{
         *destptr=destptr[pos];
         destptr++;
-    }while(*destptr);
+    }while(*(destptr-1));
     RecomputeSize();
 #endif
     }
