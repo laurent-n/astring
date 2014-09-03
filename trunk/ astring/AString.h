@@ -1,7 +1,7 @@
 /**
 \mainpage AString Main Page
 \author Laurent NAVARRO ln@altidev.com
-\version 0.3 2014-05-02
+\version 0.4 2014-09-03
 \copyright MIT X11 : See  .h file header
 Copyright (C) 2013 Laurent NAVARRO
 Permission is hereby granted, free of charge, to any person obtaining
@@ -51,6 +51,15 @@ Documentation is generated using Doxygen,
 available online here <a href="http://www.altidev.com/ln/AString/">http://www.altidev.com/ln/AString/</a>
 or at chm format here <a href="http://www.altidev.com/ln/AString/AString.chm">AString.chm</a> and on the repository.
 
+\subsection config Configuration details
+Some configuration can be done by settings some define on the --- Write your settings Here --- section of the Header file \n
+Here a summary See source for details :
+- ASTRING_IMPLEMENT_WITH_STD_STRING make AString inherits from std::string (probably better if you fully trust it) instead of the buffer based implementation
+- ASTRING_INTEROP_STD_STRING for buffer base implementation, allow transparent interoperability with std::string (constructor & cast operator)
+- ASTRING_NOSTL remove all feature using STL like vector et stream.
+- ASTRING_INTEROP_BCB Enable interoperability with C++ Builder AnsiString and UnicodeString (constructor & cast operator)
+- ASTRING_INTEROP_VSS Enable interoperability with Visual Studio CString (constructor & cast operator)
+
 \subsection impl Implementation details
 if \c ASTRING_IMPLEMENT_WITH_STD_STRING is set to 0 the string is implemented by a pointer on a buffer. \n
 However a specific tips was used to allow string to be used on %s printf like function on some compiler inspired from Chris OldWood blog A Not-So-Clever-Now String Implementation \n
@@ -60,7 +69,7 @@ and to compute with offset to access to stored size and capacity attributes as d
 +--------------+
 + Size         +   <-- StrBuffer - 2*sizeof(unsigned) or GetSize() or GetRawBuffer()
 +--------------+
-+ Capacity     +   <-- StrBuffer - 2*sizeof(unsigned) or GetCapacity()
++ Capacity     +   <-- StrBuffer - 1*sizeof(unsigned) or GetCapacity()
 +--------------+
 + char* Buffer +   <-- StrBuffer Attribute, conatains zero terminated characters string.
 +--------------+
@@ -86,9 +95,12 @@ Project include test project on
 - C++ Builder XE2 32 bits
 
 I've done memory check using visual leak detector on Visual Studio http://vld.codeplex.com/ \n
+And DrMemory on Windows \n
 And valgring on Linux, here command to test : \n
 - valgrind --tool=memcheck bin/Debug/AStringUT
 - valgrind --leak-check=full --tool=memcheck bin/Debug/AStringUT
+\nI've done coverage test on GCC using GCov
+\nI've used CppCheck also.
 
 \subsection release Release History
 - version 0.1 2013-08-22 Initial
@@ -98,13 +110,16 @@ And valgring on Linux, here command to test : \n
 - version 0.3 2014-05-02
     - Bugfix on comparison operator
     - Added Char* on left of comparison operator
+- version 0.4 2014-09-03
+    - Added test for 100% coverage on Gcc
+    - Minor Bugfix in case of reserve(0)
 
 */
 #ifndef ASTRING_H_INCLUDED
 #define ASTRING_H_INCLUDED
 //---------- Write your settings Here -------------------
 //#define ASTRING_IMPLEMENT_WITH_STD_STRING 1
-
+#define ASTRING_INTEROP_STD_STRING 1
 
 #if _MSC_VER
 #define ASTRING_INTEROP_VSS 1
@@ -206,6 +221,11 @@ class AString
     \param Src source string
     ****************************************************/
     AString(const std::string &Src);
+    /**
+    std::string cast operator.
+    To easyly convert an AString to a std::string
+    ****************************************************/
+    operator std::string () const;
     #endif
     /**
     Assignement operator from AString.
@@ -345,9 +365,9 @@ class AString
     bool operator >(const char *RightStr) const;
     friend bool operator <(const char *LeftStr,const AString &RightStr);
     friend bool operator >(const char *LeftStr,const AString &RightStr);
-    AString substr( unsigned pos = 0,unsigned count = npos ) const;
-    size_t find(const char* Searched,unsigned StartPos=0,unsigned count=0) const;
-    size_t find(char Searched,unsigned StartPos=0) const;
+    AString substr( size_t pos = 0,size_t count = npos ) const;
+    size_t find(const char* Searched,size_t StartPos=0,size_t count=0) const;
+    size_t find(char Searched,size_t StartPos=0) const;
 #endif //  ! ASTRING_IMPLEMENT_WITH_STD_STRING
     /**
     Replace a set or character by a string on the current string.
@@ -358,8 +378,9 @@ class AString
     */
     AString& replace( size_t pos, size_t count,const AString& str );
     /**
-    Replace a substring by a nzw string on the current string.
-    \param src the substring to replace
+    Replace a substring by a new string on the current string.
+	\param src the substring to replace
+	\param str the string used to replace
     \return the current string
     */
     AString& replace( const AString& src,const AString& str );
@@ -394,9 +415,8 @@ class AString
     S3.Format("Y %d %.02f %s",10,2.52,"DEF");
     // S3 ="Y 10 2.52 DEF"
     \endcode
-    \param dest destination C Buffer
-    \param destsize size of the buffer
-    \param pos position where the copy will occur
+    \param Fmt format string silmilar to sprintf
+	\return Formated string
     ****************************************************/
     AString& Format(const char *Fmt,...);
     friend AString Asprintf(const char *Fmt,...);
@@ -453,7 +473,7 @@ class AString
         AString S3("Hello dear friends");
         std::deque<AString> Ds;
         unsigned res=S3.explode(" ",Ds);
-        // Result : res=3, Ds contains 2 values : "Hello" ,"dear", "friends"
+        // Result : res=3, Ds contains 3 values : "Hello" ,"dear", "friends"
         \endcode
      */
     template <class ResultContainerType>
@@ -542,12 +562,11 @@ AString AString::implode(AString Separator,const T &Ctnr)
 template <class ResultContainerType>
 unsigned AString::explode(AString Separator,ResultContainerType &Result)
 {
-	size_t p;
 	unsigned start=0;
 	Result.clear();
 	while(1)
 	{
-		p=find(Separator.c_str(),start);
+		size_t p=find(Separator.c_str(),start);
 		if(p==npos)
 		{
 			Result.push_back(substr(start));

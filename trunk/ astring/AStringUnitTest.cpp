@@ -44,6 +44,10 @@ void Construct()
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S0.c_str(),"") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S0.size() );
 
+    AString S0b(S0);
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S0b.c_str(),"") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S0b.size() );
+
     AString S1("Hello");
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S1.c_str(),"Hello") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)5u, S1.size() );
@@ -105,6 +109,19 @@ void Construct()
 	CPPUNIT_ASSERT_EQUAL ( AString("0.1203"), S14 );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)6u, S14.size() );
 
+	string StdString1("HELLO");
+
+    AString S15b(StdString1);
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S15b.c_str(),"HELLO") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)5u, S15b.size() );
+	StdString1="";
+    AString S16b(StdString1);
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S16b.c_str(),"") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S16b.size() );
+	StdString1=S15b;
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(StdString1.c_str(),"HELLO") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)5u, StdString1.size() );
+
 #if ASTRING_INTEROP_VSS
 	CStringA CS1("Hello CString");
 	AString S15(CS1);
@@ -151,17 +168,30 @@ void Modifiers()
 	CPPUNIT_ASSERT ( S6.c_str()==ptr );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)11u, S6.size() );
 	CPPUNIT_ASSERT ( 20u<= S6.capacity() );
-
     S6[6]='w';
     S6.at(7)='O';
     CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S6.c_str(),"Hello wOrld") );
     CPPUNIT_ASSERT_EQUAL ( 'e', S6[1]);
     CPPUNIT_ASSERT_EQUAL ( 'l', S6.at(2));
-    // Test const accesors
+
+    S6.reserve(5); // Test the string is not cut
+    CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S6.c_str(),"Hello wOrld") );
+    S6="";
+    S6.reserve(0); // Test behavior of reserve 0 on empty string
+	#if ! ASTRING_IMPLEMENT_WITH_STD_STRING
+	CPPUNIT_ASSERT_THROW(S6[60], AStringException);
+	CPPUNIT_ASSERT_THROW(S6.at(60), AStringException);
+    #endif
+
+    // Test const accessors
     {
     const AString S1("World");
     CPPUNIT_ASSERT_EQUAL ( 'o', S1[1]);
     CPPUNIT_ASSERT_EQUAL ( 'r', S1.at(2));
+	#if ! ASTRING_IMPLEMENT_WITH_STD_STRING
+	CPPUNIT_ASSERT_THROW(S1[60], AStringException);
+	CPPUNIT_ASSERT_THROW(S1.at(60), AStringException);
+    #endif
 
     AString S2("Hello");
     CPPUNIT_ASSERT_EQUAL ( 0, strcmp((S2+S1).c_str(),"HelloWorld") );
@@ -193,6 +223,7 @@ void Modifiers()
 	CPPUNIT_ASSERT (  ("abc"!=S1) );
 	CPPUNIT_ASSERT ( S1<"bbcd" );
 	CPPUNIT_ASSERT ( !(S1<S2) );
+	CPPUNIT_ASSERT ( !(S1<S1) );
 	CPPUNIT_ASSERT ( S2<S1 );
 	CPPUNIT_ASSERT ( !(S1<"aacd") );
 	CPPUNIT_ASSERT ( !(S1<"abcc") );
@@ -200,8 +231,10 @@ void Modifiers()
 	CPPUNIT_ASSERT ( S1<"abcde" );
 	CPPUNIT_ASSERT ( S1>"abcc" );
 	CPPUNIT_ASSERT ( S1>"abc" );
+	CPPUNIT_ASSERT ( !(S1>"abcd") );
 	CPPUNIT_ASSERT ( S1>"aacd" );
 	CPPUNIT_ASSERT ( !(S2>S1) );
+	CPPUNIT_ASSERT ( !(S2>S2) );
 	CPPUNIT_ASSERT ( S1>S2 );
 	CPPUNIT_ASSERT ( "abc"<S1 );
 	CPPUNIT_ASSERT ( !("abcd"<S1) );
@@ -231,6 +264,7 @@ void Modifiers()
 	CPPUNIT_ASSERT ( S1!=S2 );
 
     AString S7;
+	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S7.size() );
     S6.assign("Hello");
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S6.c_str(),"Hello") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)5u, S6.size() );
@@ -242,6 +276,10 @@ void Modifiers()
     S7.assign("Hello");
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"Hello") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)5u, S7.size() );
+
+    S7.assign("");
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S7.size() );
 
     S7=AString("0123456789");
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"0123456789") );
@@ -256,10 +294,10 @@ void Modifiers()
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"AbcD") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)4u, S7.size() );
 
-	S7.replace(1,2,"bcxy");
-	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"AbcxyD") );
-	CPPUNIT_ASSERT_EQUAL ( (size_t)6u, S7.size() );
-	CPPUNIT_ASSERT ( 6u<= S7.capacity() );
+	S7.replace(1,2,"bcxy0123456");
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"Abcxy0123456D") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)13u, S7.size() );
+	CPPUNIT_ASSERT ( 13u<= S7.capacity() );
 
 	S7=AString("0123456789");
 	S7.replace(1,4,"XY");
@@ -299,11 +337,24 @@ void Modifiers()
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S7.size() );
 
+    S7.rtrim();
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S7.size() );
+
     S7=AString(" \t\n\r  \t\n\r ");
     S7.trim();
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S7.size() );
 
+    S2="Abcd";
+    S7=S2;
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"Abcd") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)4u, S7.size() );
+
+    S2="";
+    S7=S2;
+	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S7.c_str(),"") );
+	CPPUNIT_ASSERT_EQUAL ( (size_t)0u, S7.size() );
 }
 
 void Handling()
@@ -326,10 +377,19 @@ void Handling()
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(S2.c_str(),"0123456789ABCDEF") );
 	CPPUNIT_ASSERT_EQUAL ( (size_t)16u, S2.size() );
 
+	#if ! ASTRING_IMPLEMENT_WITH_STD_STRING
+	CPPUNIT_ASSERT_THROW(S1.substr(60), AStringException);
+	CPPUNIT_ASSERT_THROW(S2.replace(60,5,"XX"), AStringException);
+    #endif
+
+
     char buf[16]="abcdefghijklmno";
     S1.strncpy(buf,4,5); //4 = 3 car + \0
 
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(buf,"567") );
+
+	CPPUNIT_ASSERT_THROW(S1.strncpy(buf,5,20); , AStringException);
+	CPPUNIT_ASSERT_THROW(S1.strncpy(buf,0); , AStringException);
 
     S1.strncpy(buf,5);
 	CPPUNIT_ASSERT_EQUAL ( 0, strcmp(buf,"0123") );
@@ -380,7 +440,17 @@ void Handling()
     {
 	CPPUNIT_FAIL ( "wrong exception type" );
     }
+	#if ! ASTRING_IMPLEMENT_WITH_STD_STRING
+    try{
+        S3="ABC";
+        CPPUNIT_ASSERT_EQUAL ( S3[2], 'C' );
+        S3[4];
+        CPPUNIT_FAIL ( "Should raise exception" );
+    }catch(AStringException){};
+    S3="";
+    CPPUNIT_ASSERT_EQUAL ( S3[0], '\0' );
 
+    #endif
 }
 
 #if !ASTRING_NOSTL
@@ -443,6 +513,7 @@ void TestStream()
 	CPPUNIT_ASSERT_EQUAL ( -25, S3.ToIntDef(999) );
     S3="ABC";
 	CPPUNIT_ASSERT_EQUAL ( 999, S3.ToIntDef(999) );
+	CPPUNIT_ASSERT_THROW ( S3.ToInt(); , AStringException);
 
 }
 #endif
