@@ -1,4 +1,4 @@
-AString is a compiler portable C++ String Class with some enhanced features.
+**AString** is a compiler portable C++ String Class with some enhanced features.
 
 Works on : GCC, Visual Sudio, C++ Builder
 ##Description
@@ -23,6 +23,51 @@ AString provide the following features :
 ##Documentation
 Documentation is generated using Doxygen, available online here http://www.altidev.com/ln/AString/ or at chm format here http://www.altidev.com/ln/AString/AString.chm and on the repository.
 
+##DEMO
+```C++
+// Basic assignement and display
+AString SHello("Hello");
+AString SWorld,Res;
+SWorld="World";
+Res=SHello+" "+SWorld;
+cout << Res << endl;
+if((SHello=="Hello")&&(SWorld<"Z"))
+   cout << "Comparison OK" << endl;
+// OStringStream behavior integrated. Simplify transformation
+SHello<<" append "<<10;
+cout << SHello << endl;
+// sprintf like format returning a astring but without handling
+cout << Asprintf("Like sprintf %d %.02f %s",1,2.5,"ABC")<< endl;
+// or with the result on the variable
+SHello.Format("\tHello %d %s X ",10,"World");
+cout<<SHello.trim("X \r\n\t")<<endl;
+// Replace string by string
+cout<<SHello.replace("World","Friends")<<endl;
+// Safe strncpy
+char Dest[10]="123456789";
+SHello.strncpy(Dest,5); // 5 size of the buffer copy max 4 char+ 0
+cout<<"strncpy always zero ended "<<Dest<<endl;
+// Easy conversion from and To int with exception or default value
+cout<< (AString(10+5).ToInt()+3)<<"  "<<SHello.ToIntDef(999)<<endl;
+// Explode and implode
+AString S3("Hello dear friends");
+std::deque<AString> Ds;
+
+cout<<"explode count="<<S3.explode(" ",Ds);;
+cout<<" implode="<<AString::implode("-",Ds)<<endl;
+```
+Providing this result :
+```
+ Hello World
+ Comparison OK
+ Hello append 10
+ Like sprintf 1 2.50 ABC
+ Hello 10 World
+ Hello 10 Friends
+ strncpy always zero ended Hell
+ 18  999
+ explode count=3 implode=Hello-dear-friends
+```
 ##Todo
   * Add missing std::string reimplementation (rfind,...)
   * Add some features  ToUpper, ToLower
@@ -45,11 +90,14 @@ I'm using the TDD logic for this library, so it include mainly project to run CP
 I've done memory check using visual leak detector on Visual Studio http://vld.codeplex.com/ 
  And DrMemory on Windows 
  And valgring on Linux, here command to test : 
-
-  *valgrind –tool=memcheck bin/Debug/AStringUT
-  *valgrind –leak-check=full –tool=memcheck bin/Debug/AStringUT 
+``` 
+  * valgrind –tool=memcheck bin/Debug/AStringUT
+  * valgrind –leak-check=full –tool=memcheck bin/Debug/AStringUT 
+```  
 I've done coverage test on GCC using GCov. 
 I've used CppCheck also.
+
+
 
 ##Release History
   * version 0.1 2013-08-22 Initial
